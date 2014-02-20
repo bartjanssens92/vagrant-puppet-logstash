@@ -1,7 +1,5 @@
 # Bart Janssens 20-02-14
 
-#package {"ruby":  ensure => present; } #moved to the modules.pp
+import 'classes/*.pp'
 
-import 'repo/*.pp'
-
-import 'modules/*.pp'
+import 'nodes/*.pp'
