@@ -46,7 +46,5 @@ node 'logstash' {
 	# Start all the things
 
 	service { "redis": enable 	=> true; }
-	service { "httpd": enable	=> true; }
-		#status		=> 'running',
 	
 }
