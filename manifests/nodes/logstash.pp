@@ -3,23 +3,16 @@ node 'logstash' {
 	include ::logstash_repos
 
 	include ::kibana_ins
+		
+	include ::logstash_ins
 	
+	include ::elasticsearch_ins
+
 	#@@@@@@@@@@#
 	#@ Apache @#
 	#@@@@@@@@@@#
 	
 	class { 'apache': }
-
-	# logstash
-
-	class {'logstash':
-
-		ensure			=> 'present',
-		java_install 	=> true,
-		status			=> running,
-		require 		=> yumrepo['logstashrepo'],
-
-	}
 
 	# redis
 
@@ -31,17 +24,9 @@ node 'logstash' {
 
 	}
 
-	# elasticsearch clean
-
-	class { 'elasticsearch': 
-
-		status		=> 'running',
-		require 		=> yumrepo['elasticsearch-0.90'],
-
-	} 
-	
 	# Start all the things
 
 	service { "redis": enable 	=> true; }
+
 	
 }
