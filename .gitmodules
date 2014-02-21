@@ -16,3 +16,6 @@
 [submodule "modules/kibana"]
 	path = modules/kibana
 	url = https://github.com/electrical/puppet-kibana.git
+[submodule "modules/file_concat"]
+	path = modules/file_concat
+	url = https://github.com/electrical/puppet-lib-file_concat.git
