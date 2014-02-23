@@ -26,7 +26,7 @@ node 'logstash' {
 
 	# Start all the things
 
-	service { "redis": enable 	=> true; }
+	#service { "redis": enable 	=> true; }
 
 	
 }
