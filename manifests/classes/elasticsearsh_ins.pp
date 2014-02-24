@@ -5,7 +5,7 @@ class elasticsearch_ins {
 	class { 'elasticsearch': 
 
 		status			=> 'running',
-		require 		=> yumrepo['elasticsearch-0.90'],
+		require 		=> Yumrepo['elasticsearch-0.90'],
 
 	}
 	 

@@ -20,7 +20,7 @@ node 'logstash' {
 
 		ensure		=> 'present',
 		status		=> 'running',
-		require 		=> yumrepo['epel'],	
+		require 	=> Yumrepo['epel'],	
 
 	}
 

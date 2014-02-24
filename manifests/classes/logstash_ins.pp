@@ -12,7 +12,7 @@ class logstash_ins {
 		init_defaults 	=> $config_hash,
 		java_install 	=> true,
 		status			=> 'running',
-		require 		=> yumrepo['logstashrepo'],
+		require 		=> Yumrepo['logstashrepo'],
 
 	}
 
