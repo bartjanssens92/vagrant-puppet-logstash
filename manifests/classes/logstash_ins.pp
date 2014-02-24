@@ -16,4 +16,4 @@ class logstash_ins {
 
 	}
 
-}
+} 

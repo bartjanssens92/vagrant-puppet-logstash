@@ -7,10 +7,6 @@ node 'logstash' {
 	include ::logstash_ins
 	
 	include ::elasticsearch_ins
-
-	#@@@@@@@@@@#
-	#@ Apache @#
-	#@@@@@@@@@@#
 	
 	class { 'apache': }
 
@@ -23,10 +19,5 @@ node 'logstash' {
 		require 	=> Yumrepo['epel'],	
 
 	}
-
-	# Start all the things
-
-	#service { "redis": enable 	=> true; }
-
 	
 }

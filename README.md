@@ -55,7 +55,31 @@ b) output elasticsearch
 Not sure how to do this. Got the template working so logstash can enable on startup. 
 
 -- Gitlog atm
+commit 03d449bbda2e1567141d076df02f43678aba633b
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Mon Feb 24 08:38:26 2014 +0100
 
+    Cleanup
+
+commit 0cf5b81ec61224ad2e79150d615c5b6554147be1
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Mon Feb 24 08:35:33 2014 +0100
+
+    Cleanup
+
+commit 21f631c4a6804f616884d06f42618de982660ef9
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Sun Feb 23 14:37:14 2014 +0100
+
+    Updtaing folder for other laptop
+
+commit b7f49a0a8e5a21e707851455388eec15d2485a62
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Fri Feb 21 17:17:40 2014 +0100
+
+    Updated README
+
+commit 4eb115863140df5743c090a82b12fb00ba5066bb
 Author: bartjanssens92 <bartjanssens92@gmail.com>
 Date:   Fri Feb 21 17:15:44 2014 +0100
 
