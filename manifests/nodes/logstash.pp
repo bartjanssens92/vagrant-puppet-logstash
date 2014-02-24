@@ -1,5 +1,7 @@
 node 'logstash' {
 
+	#include ::update
+
 	include ::logstash_repos
 
 	include ::kibana_ins
@@ -10,6 +12,11 @@ node 'logstash' {
 	
 	class { 'apache': }
 
+	apache::vhost { 'first.example.com':
+    	port    => '81',
+      	docroot => '/var/www/first',
+    }
+
 	# redis
 
 	package {"redis": 
@@ -19,5 +26,9 @@ node 'logstash' {
 		require 	=> Yumrepo['epel'],	
 
 	}
+
+	package { "unzip": ensure		=> 'present'; }
+
+	include ::kibana_tmp
 	
 }

@@ -27,14 +27,14 @@ class logstash_repos {
 
 	# Adding repo for kibana
 
-	yumrepo { 'monitoringsucks': 
-	
-		name		=> 'MonitoringSuck-at-Inuits',
-		baseurl		=> 'http://pulp2.internal.inuits.eu/pulp/repos/pub/monitoring',
-		enabled		=> 1,
-		gpgcheck	=> 0,
-		
-	}
+#	yumrepo { 'monitoringsucks': 
+#	
+#		name		=> 'MonitoringSuck-at-Inuits',
+#		baseurl		=> 'http://pulp2.internal.inuits.eu/pulp/repos/pub/monitoring',
+#		enabled		=> 1,
+#		gpgcheck	=> 0,
+#		
+#	}
 
 	# Adding EPEL repo
 
