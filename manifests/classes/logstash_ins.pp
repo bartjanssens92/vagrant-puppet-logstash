@@ -16,4 +16,21 @@ class logstash_ins {
 
 	}
 
+	logstash::configfile { 'logstash_conf':
+
+		content	=> (' # Config logstash in logstash_ins.pp
+input {
+	file {
+	type => "syslog"
+    	host => "0.0.0.0"
+    	port => "3514"
+	}
+}
+output {
+	host => 10.0.0.51
+}
+		')
+
+	}
+
 } 

@@ -52,9 +52,37 @@ b) output elasticsearch
     host => $elasticsearch_server,
   }
 
-Not sure how to do this. Got the template working so logstash can enable on startup. 
+I used this in the logstash_ins.pp file to add the content in the /etc/logstash/conf.d/logstash.conf file:
+
+logstash::configfile { 'logstash_conf':
+
+        content => (' # Config logstash in logstash_ins.pp
+input {
+    file {
+    type => "syslog"
+        host => "0.0.0.0"
+        port => "3514"
+    }
+}
+output {
+    host => 10.0.0.51
+}
+        ')
+}
 
 -- Gitlog atm
+commit 45a7572e7cfbe8f62b6aa2c3df2c5248bf066fd0
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Mon Feb 24 17:23:07 2014 +0100
+
+    "Fixed" some stuff
+
+commit 8e379c8ae3e7450d2d256ba8cdf14a46cd0bc3b8
+Author: bartjanssens92 <bartjanssens92@gmail.com>
+Date:   Mon Feb 24 11:49:00 2014 +0100
+
+    Trying to get the config working
+
 commit 03d449bbda2e1567141d076df02f43678aba633b
 Author: bartjanssens92 <bartjanssens92@gmail.com>
 Date:   Mon Feb 24 08:38:26 2014 +0100
