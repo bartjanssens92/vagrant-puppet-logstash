@@ -55,21 +55,23 @@ b) output elasticsearch
 
 I used this in the logstash_ins.pp file to add the content in the /etc/logstash/conf.d/logstash.conf file:
 
-logstash::configfile { 'logstash_conf':
+```puppet
+    logstash::configfile { 'logstash_conf':
 
         content => (' # Config logstash in logstash_ins.pp
-input {
-    file {
-    type => "syslog"
-        host => "0.0.0.0"
-        port => "3514"
-    }
-}
-output {
-    host => 10.0.0.51
-}
+            input {
+                file {
+                    type => "syslog"
+                    host => "0.0.0.0"
+                    port => "3514"
+                }
+            }
+            output {
+                host => 10.0.0.51
+            }
         ')
-}
+    }
+```
 
 ##Gitlog atm
 
