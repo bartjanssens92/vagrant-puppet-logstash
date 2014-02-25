@@ -1,4 +1,4 @@
-Packages that are getting installed via puppet:
+##Packages that are getting installed via puppet:
 
  - Apache
  - Concat 		(needed for apache)
@@ -8,12 +8,13 @@ Packages that are getting installed via puppet:
  - Logstash
  - Stdlib 		(needed for logstash)
 
-Packages that are getting installed via yum:
+##Packages that are getting installed via yum:
 
  - Ruby			(needed for kibana)
  - Rubygems		(needed for kibana)
+ - Unzip        (using for kibana atm, getting the package for k3)
 
-Yumrepos added:
+##Yumrepos added:
 
 	name 		=> 'logstash-repository-for-1.3.x-packages',
  	baseurl 	=> 'http://packages.elasticsearch.org/logstash/1.3/centos',
@@ -34,7 +35,7 @@ Yumrepos added:
 	
 	And the ssh one.
 	
-Config for logstash (WIP)
+##Config for logstash (**WIP**)
 
 a) input = syslog or syslog-pri
 
@@ -70,7 +71,8 @@ output {
         ')
 }
 
--- Gitlog atm
+##Gitlog atm
+
 commit 45a7572e7cfbe8f62b6aa2c3df2c5248bf066fd0
 Author: bartjanssens92 <bartjanssens92@gmail.com>
 Date:   Mon Feb 24 17:23:07 2014 +0100
