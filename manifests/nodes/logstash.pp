@@ -9,11 +9,13 @@ node 'logstash' {
 	include ::logstash_ins
 	
 	include ::elasticsearch_ins
+
+	include ::opening_ports
 	
 	class { 'apache': }
 
 	apache::vhost { 'first.example.com':
-    	port    => '81',
+    	port    => '80',
       	docroot => '/var/www/first',
     }
 

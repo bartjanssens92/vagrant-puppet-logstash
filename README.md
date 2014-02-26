@@ -67,11 +67,28 @@ I used this in the logstash_ins.pp file to add the content in the /etc/logstash/
                 }
             }
             output {
-                host => 10.0.0.51
+                host => 10.0.2.15
             }
         ')
     }
 ```
+
+##Problem with iptables not letting me acces localhost:9292
+
+Needed to add the following rule in /etc/sysconfig/iptables
+-A INPUT -m state --state NEW -m tcp -p tcp -m multiport --dports 22, 80, 9200 -j ACCEPT
+
+I used file_line form stdlib to do this for me
+
+```puppet
+    file_line { 'Opening Ports 22, 80, 9200':
+        path    => '/etc/sysconfig/iptables',
+        line    => '-A INPUT -m state --state NEW -m tcp -p tcp -m multiport --dports 22,80,9200 -j ACCEPT',
+        match   => '\-[A]\s[A-Z]{5}\s\-[m]\s[a-z]{5}\s\-{2}[a-z]{5}\s[A-Z]{3}\s\-[m]\s[t,c,p]{3}\s\-[p]\s[t,p,c]{3}\s'
+    }
+```
+
+This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT line
 
 ##Gitlog atm
 

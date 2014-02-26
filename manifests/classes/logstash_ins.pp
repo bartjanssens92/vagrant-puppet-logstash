@@ -20,14 +20,18 @@ class logstash_ins {
 
 		content	=> (' # Config logstash in logstash_ins.pp
 input {
-	file {
+	syslog {
 	type => "syslog"
-    	host => "0.0.0.0"
     	port => "3514"
 	}
 }
 output {
-	host => 10.0.0.51
+	stdout {
+		
+	}
+	elasticsearch {
+		cluster	=> "elasticsearch"
+	}
 }
 		')
 
