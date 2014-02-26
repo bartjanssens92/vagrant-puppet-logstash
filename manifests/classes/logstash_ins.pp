@@ -20,19 +20,34 @@ class logstash_ins {
 
 		content	=> (' # Config logstash in logstash_ins.pp
 input {
+	
 	syslog {
 	type => "syslog"
-    	port => "3514"
+    	port => "3355"
 	}
+
+  	#file {
+    #	path => "/var/log/messages"
+    #	type => "syslog"
+  	#}
+
+  	#file {
+    #	path => "/var/log/apache/access.log"
+    #	type => "apache"
+  	#}
 }
+
+#filter {
+#	grok {
+#        type => "apache-error"
+#        pattern => "\[%{HTTPDATE:timestamp}\] \[%{WORD:class}\] \[%{WORD:originator} %{IP:clientip}\] %{GREEDYDATA:errmsg}"
+#    }
+#}
+
 output {
-	stdout {
-		
-	}
-	elasticsearch {	}
-}
-		')
-
-	}
-
+#	stdout {}
+	elasticsearch {}
 } 
+		')
+	}
+}

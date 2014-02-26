@@ -28,5 +28,7 @@ node 'logstash' {
 		require 	=> Yumrepo['epel'],	
 
 	}
-	
+
+	package { "man": ensure		=> 'present'; }
+	package { "lsof": ensure	=> 'present'; }
 }
