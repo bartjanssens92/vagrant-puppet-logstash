@@ -29,9 +29,7 @@ output {
 	stdout {
 		
 	}
-	elasticsearch {
-		cluster	=> "elasticsearch"
-	}
+	elasticsearch {	}
 }
 		')
 

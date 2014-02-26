@@ -28,9 +28,5 @@ node 'logstash' {
 		require 	=> Yumrepo['epel'],	
 
 	}
-
-	package { "unzip": ensure		=> 'present'; }
-
-	include ::kibana_tmp
 	
 }
