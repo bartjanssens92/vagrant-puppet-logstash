@@ -36,9 +36,7 @@
 	enabled		=> 1,
 	gpgcheck	=> 0,
 	
-	And the ssh one.
-	
-##Config for logstash (**WIP**)
+##Config for logstash 
 
 I used this in the logstash_ins.pp file to add the content in the /etc/logstash/conf.d/logstash.conf file:
 
@@ -47,16 +45,20 @@ I used this in the logstash_ins.pp file to add the content in the /etc/logstash/
 
         content => (' # Config logstash in logstash_ins.pp
             input {
-                file {
+
+                syslog {
                     type => "syslog"
-                    host => "0.0.0.0"
-                    port => "3514"
+                    port => "5544"
+                }
+
+            }
+
+            output {
+                elasticsearch {
+                    host    => "localhost"
                 }
             }
-            output {
-                host => 10.0.2.15
-            }
-        ')
+        '),
     }
 ```
 
@@ -74,79 +76,71 @@ I used file_line form stdlib to do this for me
         match   => '\-[A]\s[A-Z]{5}\s\-[m]\s[a-z]{5}\s\-{2}[a-z]{5}\s[A-Z]{3}\s\-[m]\s[t,c,p]{3}\s\-[p]\s[t,p,c]{3}\s'
     }
 ```
-
 This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT line
 
-##Gitlog atm
+##Rsyslog configuration
+```puppet
+    file_line { 'Configuring rsyslog':
+        path    => '/etc/rsyslog.conf',
+        line    => '*.* @localhost:5544',
+    }
+```
 
-commit 45a7572e7cfbe8f62b6aa2c3df2c5248bf066fd0
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Mon Feb 24 17:23:07 2014 +0100
+##Thing I learned
 
-    "Fixed" some stuff
+ - Vagrant
+    - Making a vagrant box 
+    - Adding the basic boxes
+    - Building furder on an existing box
+    - Enabeling puppet provisioning
+    - Opening the right ports on the guest and sending them to the host
 
-commit 8e379c8ae3e7450d2d256ba8cdf14a46cd0bc3b8
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Mon Feb 24 11:49:00 2014 +0100
+ - Puppet
+    - Making a file structure that puppet can use
+    - Writing a manuscript
+    - Using modules
+        - To **allways** read the README.md file 
+        - Calling classes
+        - Giving a class some parameters
+    - Using include
+    - Making my own classes
+    - Never be afraid to ask questions
+    - Using functions from puppet libaries (file_line)
+    - Regex
+    - ...
 
-    Trying to get the config working
+ - CentOS
+    - Where to start...
+    - Iptables
+    - pwd
+    - vi
+    - vim
+    - find
+    - man
+    - yum
+    - yum.repos.d
+    - lsof
+    - service
+    - sudo su
+    - ssh
+    - grep
+    - tail -f
+    - logger
+    - And I'm sure many more...
 
-commit 03d449bbda2e1567141d076df02f43678aba633b
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Mon Feb 24 08:38:26 2014 +0100
+ - Ubuntu
+    - Sublime text 2 :S (gonna change to vim)
+    - VirtualBox
+    - sudo apt-get
+    - Wireless drivers search
+    - Pidgin
 
-    Cleanup
+ - Github
+    - git add
+    - git status
+    - git log
+    - git commit
+    - git push
 
-commit 0cf5b81ec61224ad2e79150d615c5b6554147be1
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Mon Feb 24 08:35:33 2014 +0100
 
-    Cleanup
-
-commit 21f631c4a6804f616884d06f42618de982660ef9
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Sun Feb 23 14:37:14 2014 +0100
-
-    Updtaing folder for other laptop
-
-commit b7f49a0a8e5a21e707851455388eec15d2485a62
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Fri Feb 21 17:17:40 2014 +0100
-
-    Updated README
-
-commit 4eb115863140df5743c090a82b12fb00ba5066bb
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Fri Feb 21 17:15:44 2014 +0100
-
-    Added README for furder reference
-
-commit 6c4387259c814b404e143ec0b0a050cab02305b8
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Fri Feb 21 16:23:05 2014 +0100
-
-    Fixed the config for logstash, still needs work
-
-commit e81ded74075be0314ff81062166d5aef065d5db3
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Fri Feb 21 09:58:09 2014 +0100
-
-    All the modules are installing, fixed missing repos
-
-commit 002d0eed3ec8f66e24a9c3f20578d04c77ebaae8
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Thu Feb 20 19:27:27 2014 +0100
-
-    Added the remeining modules
-
-commit 296b881671c909361f088902c43e18956c466232
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Thu Feb 20 17:38:12 2014 +0100
-
-    Commit Remodeling the Manifests folder
-
-commit 5c827b01a7e991415f18669d08caf13168e374da
-Author: bartjanssens92 <bartjanssens92@gmail.com>
-Date:   Thu Feb 20 14:44:44 2014 +0100
-
-    first commit
+The end ;D
