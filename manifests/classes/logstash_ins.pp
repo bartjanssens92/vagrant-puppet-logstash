@@ -21,10 +21,9 @@ class logstash_ins {
 		content	=> (' # Config logstash in logstash_ins.pp
 			input {
 
-				file {
-					path => "/var/log/messages"
+				syslog {
 					type => "syslog"
-					sincedb_path => "$HOME/.sincedb*"
+    				port => "5544"
 				}
 
 			}

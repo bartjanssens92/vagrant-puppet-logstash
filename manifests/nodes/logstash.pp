@@ -10,6 +10,8 @@ node 'logstash' {
 	
 	include ::elasticsearch_ins
 
+	include ::rsyslog_config
+
 	include ::opening_ports
 	
 	class { 'apache': }
