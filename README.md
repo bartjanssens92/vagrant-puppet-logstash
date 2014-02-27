@@ -17,6 +17,11 @@
  - Unzip        (using for kibana atm, getting the package for k3)
  - Vim-enhanched
 
+ ##Vagrant box I used
+
+ CentOS 6.4 x86_64 Minimal (VirtualBox Guest Additions 4.2.16, Chef 11.6.0, Puppet 3.2.3)
+ http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
+
 ##Yumrepos added:
 
 	name 		=> 'logstash-repository-for-1.3.x-packages',
@@ -79,6 +84,7 @@ I used file_line form stdlib to do this for me
 This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT line
 
 ##Rsyslog configuration
+
 ```puppet
     file_line { 'Configuring rsyslog':
         path    => '/etc/rsyslog.conf',
@@ -144,6 +150,8 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
     - git commit
     - git push
     - How to format the README.md file
+    - .gitignore
+    - .gitmodulefile
 
 
 The end ;D
