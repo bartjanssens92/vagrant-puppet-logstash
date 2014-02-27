@@ -86,7 +86,7 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
     }
 ```
 
-##Thing I learned
+##Things I learned
 
  - Vagrant
     - Making a vagrant box 
@@ -126,6 +126,8 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
     - grep
     - tail -f
     - logger
+    - !!
+    - $_
     - And I'm sure many more...
 
  - Ubuntu
