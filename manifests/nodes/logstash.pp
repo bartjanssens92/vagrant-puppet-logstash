@@ -24,11 +24,14 @@ node 'logstash' {
 	package {"redis": 
 
 		ensure		=> 'present',
-		status		=> 'running',
 		require 	=> Yumrepo['epel'],	
 
 	}
 
 	package { "man": ensure		=> 'present'; }
 	package { "lsof": ensure	=> 'present'; }
+	package { "vim-enhanced": ensure 	=> 'present',
+					require		=> Yumrepo['epel'],
+			}
+	package { "ntp": ensure 	=> 'present';}
 }

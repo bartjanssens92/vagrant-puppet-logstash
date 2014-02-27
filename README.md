@@ -4,15 +4,18 @@
  - Concat 		(needed for apache)
  - Elasticsearch
  - File_concat 	(needed for logstash)
- - Kibana 		(via ssh tunnel, not working yet)
- - Logstash
+ - logstash     (version 0.90.9-1)
  - Stdlib 		(needed for logstash)
 
 ##Packages that are getting installed via yum:
 
+ - Lsof
+ - Man
+ - Ntp
  - Ruby			(needed for kibana)
  - Rubygems		(needed for kibana)
  - Unzip        (using for kibana atm, getting the package for k3)
+ - Vim-enhanched
 
 ##Yumrepos added:
 
@@ -36,22 +39,6 @@
 	And the ssh one.
 	
 ##Config for logstash (**WIP**)
-
-a) input = syslog or syslog-pri
-
-e.g
-
- logstash::input::syslog { '001input-syslog':
-    type => 'syslog',
-    host => '0.0.0.0',
-    port => '3514',
-  }
-
-b) output elasticsearch
-
- logstash::output::elasticsearch_http { '001output-elasticsearch':
-    host => $elasticsearch_server,
-  }
 
 I used this in the logstash_ins.pp file to add the content in the /etc/logstash/conf.d/logstash.conf file:
 

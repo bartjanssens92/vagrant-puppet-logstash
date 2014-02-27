@@ -13,7 +13,7 @@ Vagrant::Config.run do |config|
 
        default_config.vm.forward_port  80, 8082 # for Apache
        default_config.vm.forward_port  9200, 9200 # for Kibana3 
-       default_config.vm.forward_port  3514, 3514 # for Kibana3               
+       default_config.vm.forward_port  3355, 3355 # for Kibana3               
 
        default_config.vm.provision :puppet do |default_puppet|
        		default_puppet.manifests_path = "manifests"

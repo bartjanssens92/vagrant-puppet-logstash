@@ -5,8 +5,8 @@ class logstash_ins {
 	$config_hash = {
 		'START' 	=> 'true',
 	}
-	
-	class {'logstash':
+
+	class { 'logstash':
 
 		ensure			=> 'present',
 		init_defaults 	=> $config_hash,
@@ -19,35 +19,21 @@ class logstash_ins {
 	logstash::configfile { 'logstash_conf':
 
 		content	=> (' # Config logstash in logstash_ins.pp
-input {
-	
-	syslog {
-	type => "syslog"
-    	port => "3355"
-	}
+			input {
 
-  	#file {
-    #	path => "/var/log/messages"
-    #	type => "syslog"
-  	#}
+				file {
+					path => "/var/log/messages"
+					type => "syslog"
+					sincedb_path => "$HOME/.sincedb*"
+				}
 
-  	#file {
-    #	path => "/var/log/apache/access.log"
-    #	type => "apache"
-  	#}
-}
+			}
 
-#filter {
-#	grok {
-#        type => "apache-error"
-#        pattern => "\[%{HTTPDATE:timestamp}\] \[%{WORD:class}\] \[%{WORD:originator} %{IP:clientip}\] %{GREEDYDATA:errmsg}"
-#    }
-#}
-
-output {
-#	stdout {}
-	elasticsearch {}
-} 
-		')
+			output {
+				elasticsearch {
+					host	=> "localhost"
+				}
+			}
+		'),
 	}
 }

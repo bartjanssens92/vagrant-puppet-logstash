@@ -6,18 +6,12 @@ class elasticsearch_ins {
 
 		status							=> 'running',
 		require 						=> Yumrepo['elasticsearch-0.90'],
-       	config							=> {
-        	'node'						=> {
-        		'name'					=> 'elasticsearch001'
-        	},
-        	'index'     				=> {
-        		'number_of_replicas'	=> '0',
-           		'number_of_shards'   	=> '5'
-         	},
-         	'network'					=> {
-     			'host'               	=> $::ipaddress
-         	}
-       	}
-    }
+    version             => '0.90.9-1',
+#   config							=> {
+#     'network'					=> {
+#       'host'          => $::ipaddress
+#     }
+#   }
+  }
 	 
 }
