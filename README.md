@@ -143,6 +143,7 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
     - git log
     - git commit
     - git push
+    - How to format the README.md file
 
 
 The end ;D
