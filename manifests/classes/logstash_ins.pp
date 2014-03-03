@@ -23,9 +23,9 @@ class logstash_ins {
 
 				syslog {
 					type => "syslog"
-    				port => "5544"
+					port => "5544"
 				}
-
+		     
 			}
 
 			output {
@@ -36,3 +36,4 @@ class logstash_ins {
 		'),
 	}
 }
+ 

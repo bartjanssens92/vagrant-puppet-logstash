@@ -3,15 +3,9 @@
 class elasticsearch_ins {
 
 	class { 'elasticsearch': 
-
-		status							=> 'running',
-		require 						=> Yumrepo['elasticsearch-0.90'],
-    version             => '0.90.9-1',
-#   config							=> {
-#     'network'					=> {
-#       'host'          => $::ipaddress
-#     }
-#   }
-  }
+		status		=> 'running',
+		require 	=> Yumrepo['elasticsearch-0.90'],
+		version		=> '0.90.9-1',
+	}
 	 
 }
