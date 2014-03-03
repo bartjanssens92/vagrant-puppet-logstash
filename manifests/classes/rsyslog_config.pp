@@ -7,6 +7,7 @@ class rsyslog_config {
 
 		path	=> '/etc/rsyslog.conf',
 		line	=> '*.* @localhost:5544',
+		match	=> '\*\.\*\s\@',
 
 	}
 
