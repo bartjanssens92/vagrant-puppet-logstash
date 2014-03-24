@@ -5,7 +5,7 @@ Vagrant::Config.run do |config|
 
   config.vm.define :default do |default_config|
 
-       default_config.vm.box = "Centos64-p"
+       default_config.vm.box = "Centos64-Vstone"
        default_config.vm.network  :hostonly, "10.42.42.20" # change for reasons… was 51
 
        default_config.ssh.max_tries = 100

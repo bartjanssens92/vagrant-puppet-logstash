@@ -1,4 +1,4 @@
-##Packages that are getting installed via puppet:
+##Modules :
 
  - Apache
  - Concat 		(needed for apache)
@@ -7,7 +7,7 @@
  - logstash     (version 0.90.9-1)
  - Stdlib 		(needed for logstash)
 
-##Packages that are getting installed via yum:
+##Packages:
 
  - Lsof
  - Man
@@ -19,8 +19,7 @@
 
  ##Vagrant box I used
 
- CentOS 6.4 x86_64 Minimal (VirtualBox Guest Additions 4.2.16, Chef 11.6.0, Puppet 3.2.3)
- http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
+ http://packages.vstone.eu/vagrant-boxes/centos/6.x/centos-6.x-64bit-puppet.3.x-chef.0.10.x-vbox.4.3.2-1.box
 
 ##Yumrepos added:
 
@@ -46,25 +45,19 @@
 I used this in the logstash_ins.pp file to add the content in the /etc/logstash/conf.d/logstash.conf file:
 
 ```puppet
-    logstash::configfile { 'logstash_conf':
+# Config logstash in logstash_ins.pp
+input {
+  syslog {
+    type => "syslog"
+    port => "5544"
+  }
+}
 
-        content => (' # Config logstash in logstash_ins.pp
-            input {
-
-                syslog {
-                    type => "syslog"
-                    port => "5544"
-                }
-
-            }
-
-            output {
-                elasticsearch {
-                    host    => "localhost"
-                }
-            }
-        '),
-    }
+output {
+  elasticsearch {
+    host    => "localhost"
+  }
+}
 ```
 
 ##Problem with iptables not letting me acces localhost:9292
@@ -95,7 +88,7 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
 ##Things I learned
 
  - Vagrant
-    - Making a vagrant box 
+    - Using a vagrant box 
     - Adding the basic boxes
     - Building furder on an existing box
     - Enabeling puppet provisioning
@@ -137,7 +130,7 @@ This replaces the -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCE
     - And I'm sure many more...
 
  - Ubuntu
-    - Sublime text 2 :S (gonna change to vim)
+    - Sublime text 2
     - VirtualBox
     - sudo apt-get
     - Wireless drivers search
