@@ -9,7 +9,12 @@ class logstash_kibana_elasicsearch {
   class { 'apache_ins':}
   ->
   exec { 'Move the file for kibana latest':
-    command  => 'cp /vagrant/files/kibana-latest/* /var/www/html -r',
+#    command  => 'unzip /vagrant/files/kibana-latest/* /var/www/html -r',
+    command  => 'cd /var/www && 
+                 rm html -rf
+                 unzip /vagrant/files/kibana-latest.zip && 
+                 mv /var/www/kibana-latest /var/www/html',
+    provider  => 'shell',
     creates  => '/var/www/html/build.txt'
   }
   ->
@@ -29,8 +34,8 @@ class logstash_kibana_elasicsearch {
   }
 
   service { 'service rsyslogd restart':
-    name       => 'rsyslogd',
-    ensure     => 'running',
+    name       => 'rsyslog',
+    hasrestart  => true,
     restart    => '/sbin/service rsyslog restart',
   }
 
