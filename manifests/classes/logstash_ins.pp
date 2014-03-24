@@ -2,38 +2,17 @@
 
 class logstash_ins {
 
-	$config_hash = {
-		'START' 	=> 'true',
-	}
+  include ::params
 
-	class { 'logstash':
+  class { 'logstash':
+    ensure         => 'present',
+    init_defaults  => $params::config_hash,
+    java_install   => true,
+    status         => 'enabled',
+    require        => Class['packages'],
+  }
 
-		ensure			=> 'present',
-		init_defaults 	=> $config_hash,
-		java_install 	=> true,
-		status			=> 'running',
-		require 		=> Yumrepo['logstashrepo'],
-
-	}
-
-	logstash::configfile { 'logstash_conf':
-
-		content	=> (' # Config logstash in logstash_ins.pp
-			input {
-
-				syslog {
-					type => "syslog"
-					port => "5544"
-				}
-		     
-			}
-
-			output {
-				elasticsearch {
-					host	=> "localhost"
-				}
-			}
-		'),
-	}
+  logstash::configfile { 'logstash.conf':
+    content  => $params::logstash_config,
+  }
 }
- 
