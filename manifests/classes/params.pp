@@ -1,3 +1,6 @@
+# This class is for the configuration for logstash
+# This way my code looks cleaner3
+
 class params {
 
   $config_hash = { 'START'  => true, }

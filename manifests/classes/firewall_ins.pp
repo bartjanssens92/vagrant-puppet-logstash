@@ -10,9 +10,9 @@ class firewall_ins {
   class { 'firewall': }
 
   firewall { '100 allow http and https access':
-    port    => [22, 80, 9200, 3514],
-    proto   => tcp,
-    action  => accept,
+    port     => [22, 80, 9200, 3514],
+    proto    => tcp,
+    action   => accept,
     before   => Class['post'],
     require  => Class['pre'],
   }
