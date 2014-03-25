@@ -30,4 +30,9 @@ class logstash_kibana_elasicsearch {
   }
 
   class { 'firewall_ins':}
+
+  exec { 'Getting kibana3':
+    command => 'sudo yum install /etc/puppet/files/kibana3-html-1.0-1.x86_64.rpm -y',
+    creates => '/var/www/html/build.txt',
+  }
 }

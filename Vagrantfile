@@ -6,7 +6,8 @@ Vagrant::Config.run do |config|
   config.vm.define :default do |default_config|
 
        default_config.vm.box = "Centos64-Vstone"
-       default_config.vm.network  :hostonly, "10.42.42.20" # change for reasons… was 51
+       default_config.vm.network  :hostonly, "10.42.42.20" # change for reasons was 51
+       default_config.vm.share_folder "PuppetFiles", "/etc/puppet/files", "puppet-files"
 
        default_config.ssh.max_tries = 100
        default_config.vm.host_name = "logstash"
@@ -19,7 +20,7 @@ Vagrant::Config.run do |config|
        		default_puppet.manifests_path = "manifests"
        		default_puppet.module_path = "modules"
        		default_puppet.manifest_file = "site.pp"
-		#default_puppet.options = "--verbose --debug" # added for debugging
+      		#default_puppet.options = "--verbose --debug" # added for debugging
        end
   end
 end
