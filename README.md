@@ -1,11 +1,17 @@
 ##How to use this box :
 
 git clone ...
+
 git submodule init
+
 git submodule update
+
 vagrant up
+
 Go to virtualbox and disable the usb controller
+
 vagrant up
+
 goto localhost:8082
 
 ##Adding configuration to logstash :
@@ -16,7 +22,7 @@ goto localhost:8082
       foo {
         ...
       }',
-    order    => 10,
+    order    => "number",
   }
 
 ```
