@@ -1,5 +1,5 @@
 # This class is for the configuration for logstash
-# This way my code looks cleaner3
+# This way my code looks cleaner!
 
 class params {
 

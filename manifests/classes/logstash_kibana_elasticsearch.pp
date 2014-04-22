@@ -70,8 +70,9 @@ class logstash_kibana_elasicsearch {
     dport  => '80',
     action => 'accept',
   }
+
 #
-# Kibana VERY DIRTY
+# Kibana VERY DIRTY -- for local use only
 #
 
   exec { 'Getting kibana3':
