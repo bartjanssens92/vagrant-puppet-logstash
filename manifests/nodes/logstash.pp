@@ -1,7 +1,5 @@
 node 'logstash' {
 
-  $config_hash = { 'START'  => true, }
-
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
 #
@@ -18,6 +16,8 @@ node 'logstash' {
 #
 # Logstash
 #
+
+  $config_hash = { 'START'  => true, }
 
   class { 'logstash':
     ensure         => 'present',
