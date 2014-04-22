@@ -1,7 +1,5 @@
 node 'logstash' {
 
-  include ::params
-
   $config_hash = { 'START'  => true, }
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
@@ -29,8 +27,25 @@ node 'logstash' {
     require        => Yumrepo['logstashrepo'],
   }
 
-  logstash::configfile { 'logstash.conf':
-    content  => $params::logstash_config,
+  logstash::configfile { 'input':
+    content  => '
+      input {
+        syslog {
+          type => "syslog"
+          port => "5544"
+        }
+      }',
+    order    => 10,
+  }
+
+  logstash::configfile { 'output':
+    content  => '
+      output {
+        elasticsearch {
+          host  => "localhost"
+        }
+      }',
+    order    => 20,
   }
 
 #
