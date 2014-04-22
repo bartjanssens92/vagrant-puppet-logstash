@@ -18,9 +18,9 @@ class logstash_kibana_elasicsearch {
     port    => '80',
     docroot => '/var/www/first',
   }
-  
+
 #
-# Logstash 
+# Logstash
 #
 
   class { 'logstash':
@@ -34,9 +34,9 @@ class logstash_kibana_elasicsearch {
   logstash::configfile { 'logstash.conf':
     content  => $params::logstash_config,
   }
-  
+
 #
-# Elasticsearch 
+# Elasticsearch
 #
 
   class { 'elasticsearch':
@@ -44,7 +44,7 @@ class logstash_kibana_elasicsearch {
     require  => Yumrepo['Elasticsearch repository for 0.90.x packages'],
     version  => '0.90.9-1',
   }
-  
+
 #
 # Rsyslog config to put all the things to localhost:5544
 #
@@ -66,56 +66,10 @@ class logstash_kibana_elasicsearch {
 # Firewall
 #
 
-  resources { 'firewall':
-    purge  => true,
+  firewall{'015 http':
+    dport  => '80',
+    action => 'accept',
   }
-
-  class { ['pre', 'post']: }
-
-  class { 'firewall': }
-
-  firewall { '100 allow http and https access':
-    port     => [22, 80, 9200],
-    proto    => tcp,
-    action   => accept,
-    before   => Class['post'],
-    require  => Class['pre'],
-  }
-
-  # the firewall pre
-
-  class pre {
-    Firewall {
-      require  => undef,
-    }
-
-    # Default firewall rules
-    firewall { '000 accept all icmp':
-      proto   => 'icmp',
-      action  => 'accept',
-    }->
-    firewall { '001 accept all to lo interface':
-      proto   => 'all',
-      iniface => 'lo',
-      action  => 'accept',
-    }->
-    firewall { '002 accept related established rules':
-      proto   => 'all',
-      ctstate => ['RELATED', 'ESTABLISHED'],
-      action  => 'accept',
-    }
-  }
-
-  # This class manages the post firewall rules
-
-  class post {
-    firewall { '999 drop all':
-      proto   => 'all',
-      action  => 'drop',
-      before  => undef,
-    }
-  }
-
 #
 # Kibana VERY DIRTY
 #
@@ -131,6 +85,7 @@ class logstash_kibana_elasicsearch {
 
   yumrepo { 'logstashrepo':
     name      => 'logstash-repository-for-1.3.x-packages',
+    descr     => 'logstash-repository-for-1.3.x-packages',
     baseurl   => 'http://packages.elasticsearch.org/logstash/1.3/centos',
     gpgcheck  => 1,
     gpgkey    => 'http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
@@ -141,6 +96,7 @@ class logstash_kibana_elasicsearch {
 
   yumrepo { 'Elasticsearch repository for 0.90.x packages':
     name      => 'elasticsearch-0.90',
+    descr     => 'elasticsearch-0.90',
     baseurl   => 'http://packages.elasticsearch.org/elasticsearch/0.90/centos',
     gpgcheck  => 1,
     gpgkey    => 'http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
