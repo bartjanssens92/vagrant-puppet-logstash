@@ -139,5 +139,19 @@ node 'logstash' {
 
   # PacketBeat
   include packetbeat
+  packetbeat::protocols{'http':
+    protocol => 'http',
+    ports    => '80, 8080, 8000, 5000, 8002, 9200 , 9300',
+  }
+
+  packetbeat::protocols{'mysql':
+    protocol => 'mysql',
+    ports    => '3306',
+  }
+
+  packetbeat::protocols{'redis':
+    protocol => 'redis',
+    ports    => '6379',
+  }
 
 }
