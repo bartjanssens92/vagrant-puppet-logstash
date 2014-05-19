@@ -1,5 +1,6 @@
 node 'logstash' {
 
+  include params
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
 #
@@ -17,35 +18,16 @@ node 'logstash' {
 # Logstash
 #
 
-  $config_hash = { 'START'  => true, }
-
   class { 'logstash':
     ensure         => 'present',
-    init_defaults  => $config_hash,
+    init_defaults  => $params::config_hash,
     java_install   => true,
     status         => 'enabled',
     require        => Yumrepo['logstashrepo'],
   }
 
-  logstash::configfile { 'input':
-    content  => '
-      input {
-        syslog {
-          type => "syslog"
-          port => "5544"
-        }
-      }',
-    order    => 10,
-  }
-
-  logstash::configfile { 'output':
-    content  => '
-      output {
-        elasticsearch {
-          host  => "localhost"
-        }
-      }',
-    order    => 20,
+  logstash::configfile { 'logstash.conf':
+    content  => $params::logstash_config,
   }
 
 #
@@ -70,7 +52,8 @@ node 'logstash' {
   }
 
   service { 'service rsyslogd restart':
-    name        => 'rsyslog', hasrestart  => true,
+    name        => 'rsyslog',
+    hasrestart  => true,
     restart     => '/sbin/service rsyslog restart',
   }
 

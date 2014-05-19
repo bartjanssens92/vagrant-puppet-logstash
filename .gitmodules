@@ -21,4 +21,4 @@
 	url = https://github.com/puppetlabs/puppetlabs-firewall.git
 [submodule "modules/packetbeat"]
 	path = modules/packetbeat
-	url = git@github.com:KrisBuytaert/puppet-packetbeat.git
+	url = https://github.com/KrisBuytaert/puppet-packetbeat.git
