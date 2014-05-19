@@ -1,6 +1,5 @@
 node 'logstash' {
 
-  include params
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
 #
@@ -18,16 +17,18 @@ node 'logstash' {
 # Logstash
 #
 
+  $config_hash = { 'START'  => true, }
+
   class { 'logstash':
     ensure         => 'present',
-    init_defaults  => $params::config_hash,
+    init_defaults  => $config_hash,
     java_install   => true,
     status         => 'enabled',
     require        => Yumrepo['logstashrepo'],
   }
 
   logstash::configfile { 'logstash.conf':
-    content  => $params::logstash_config,
+    source  => '/etc/puppet/files/logstash.conf',
   }
 
 #
