@@ -54,8 +54,8 @@ node 'logstash' {
 
   class { 'elasticsearch':
     status   => 'running',
-    require  => Yumrepo['Elasticsearch repository for 0.90.x packages'],
-    version  => '0.90.9-1',
+    require  => Yumrepo['es11'],
+    version  => 'latest',
   }
 
 #
@@ -70,8 +70,7 @@ node 'logstash' {
   }
 
   service { 'service rsyslogd restart':
-    name        => 'rsyslog',
-    hasrestart  => true,
+    name        => 'rsyslog', hasrestart  => true,
     restart     => '/sbin/service rsyslog restart',
   }
 
@@ -100,9 +99,9 @@ node 'logstash' {
   # Adding the yumrepo for logstash
 
   yumrepo { 'logstashrepo':
-    name      => 'logstash-repository-for-1.3.x-packages',
-    descr     => 'logstash-repository-for-1.3.x-packages',
-    baseurl   => 'http://packages.elasticsearch.org/logstash/1.3/centos',
+    name      => 'logstash-repository-for-1.4.x-packages',
+    descr     => 'logstash-repository-for-1.4.x-packages',
+    baseurl   => 'http://packages.elasticsearch.org/logstash/1.4/centos',
     gpgcheck  => 1,
     gpgkey    => 'http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
     enabled   => 1,
@@ -110,10 +109,10 @@ node 'logstash' {
 
   # Adding yumrepo for elasticsearch
 
-  yumrepo { 'Elasticsearch repository for 0.90.x packages':
-    name      => 'elasticsearch-0.90',
-    descr     => 'elasticsearch-0.90',
-    baseurl   => 'http://packages.elasticsearch.org/elasticsearch/0.90/centos',
+  yumrepo { 'es11':
+    name      => 'es11',
+    descr     => 'elasticsearch-1.0x',
+    baseurl   => 'http://packages.elasticsearch.org/elasticsearch/1.1/centos',
     gpgcheck  => 1,
     gpgkey    => 'http://packages.elasticsearch.org/GPG-KEY-elasticsearch',
     enabled   => 1,
@@ -136,5 +135,23 @@ node 'logstash' {
   package { 'ruby': ensure  => 'present'; }
   package { 'rubygems': ensure  => 'present'; }
   package { 'ruby-devel': ensure  => 'present';}
+
+
+  # PacketBeat
+  include packetbeat
+  packetbeat::protocols{'http':
+    protocol => 'http',
+    ports    => '80, 8080, 8000, 5000, 8002, 9200 , 9300',
+  }
+
+  packetbeat::protocols{'mysql':
+    protocol => 'mysql',
+    ports    => '3306',
+  }
+
+  packetbeat::protocols{'redis':
+    protocol => 'redis',
+    ports    => '6379',
+  }
 
 }
