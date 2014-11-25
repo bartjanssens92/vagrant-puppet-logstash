@@ -9,6 +9,10 @@ Vagrant::Config.run do |config|
        default_config.vm.network  :hostonly, "10.42.42.20" # change for reasons was 51
        default_config.vm.share_folder "PuppetFiles", "/etc/puppet/files", "puppet-files"
 
+       config.vm.provider "virtualbox" do |vb|
+         vb.customize ["modifyvm", :id, "--usb", "off"]
+         vb.customize ["modifyvm", :id, "--usbehci", "off"]
+
        default_config.ssh.max_tries = 100
        default_config.vm.host_name = "logstash"
 
