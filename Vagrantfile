@@ -5,14 +5,11 @@ Vagrant::Config.run do |config|
 
   config.vm.define :default do |default_config|
 
-       default_config.vm.box = "vStone/centos-6.x-puppet.3.x"
+       default_config.vm.box = "centos6-p"
+       default_config.vm.box_url = "http://packages.vstone.eu/vagrant-boxes/centos-6.x-64bit-latest.box"
+
        default_config.vm.network  :hostonly, "10.42.42.20" # change for reasons was 51
        default_config.vm.share_folder "PuppetFiles", "/etc/puppet/files", "puppet-files"
-
-       config.vm.provider "virtualbox" do |vb|
-         vb.customize ["modifyvm", :id, "--usb", "off"]
-         vb.customize ["modifyvm", :id, "--usbehci", "off"]
-       end
 
        default_config.ssh.max_tries = 100
        default_config.vm.host_name = "logstash"
@@ -20,6 +17,11 @@ Vagrant::Config.run do |config|
        default_config.vm.forward_port  80, 8082 # for Apache
        default_config.vm.forward_port  9200, 9200 # for Kibana3
        default_config.vm.forward_port  3355, 3355 # for Kibana3
+
+#       default_config.vm.provider "virtualbox" do |vb|
+#         vb.customize ["modifyvm", :id, "--usb", "off"]
+#         vb.customize ["modifyvm", :id, "--usbehci", "off"]
+#       end
 
        default_config.vm.provision :puppet do |default_puppet|
        		default_puppet.manifests_path = "manifests"
