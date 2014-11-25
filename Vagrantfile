@@ -12,6 +12,7 @@ Vagrant::Config.run do |config|
        config.vm.provider "virtualbox" do |vb|
          vb.customize ["modifyvm", :id, "--usb", "off"]
          vb.customize ["modifyvm", :id, "--usbehci", "off"]
+       end
 
        default_config.ssh.max_tries = 100
        default_config.vm.host_name = "logstash"
