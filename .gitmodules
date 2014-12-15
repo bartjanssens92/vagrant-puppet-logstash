@@ -22,3 +22,6 @@
 [submodule "modules/packetbeat"]
 	path = modules/packetbeat
 	url = https://github.com/KrisBuytaert/puppet-packetbeat.git
+[submodule "modules/rsyslog"]
+	path = modules/rsyslog
+	url = https://github.com/KrisBuytaert/puppet-rsyslog.git

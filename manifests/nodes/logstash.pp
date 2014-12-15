@@ -59,6 +59,29 @@ node 'logstash' {
   }
 
 #
+# Shipping Apache logs to Rsyslog 
+#
+
+  class {'rsyslog::filelog': }
+
+  rsyslog::shiplog{'apache-error':
+    filename     => '/var/log/httpd/error_log',
+    inputfiletag => 'apache-error',
+  }
+  rsyslog::shiplog{'apache-access':
+    filename     => '/var/log/httpd/access_log',
+    inputfiletag => 'apache-access',
+  }
+  rsyslog::shiplog{'443-apache-error':
+    filename     => '/var/log/httpd/first.example.com_access.log',
+    inputfiletag => 'apache-serror',
+  }
+  rsyslog::shiplog{'443-apache-access':
+    filename     => '/var/log/httpd/first.example.com_error.log',
+    inputfiletag => 'apache-saccess',
+  }
+
+#
 # Firewall
 #
 
