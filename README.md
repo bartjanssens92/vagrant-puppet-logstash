@@ -9,7 +9,7 @@ Currently used for a PacketBeat Proof Of Concept
 
 Assumes you have the PacketBeat rpm availalbe in a repo.  
 
-
+Currently used for a Wso2 esb Proof Of Concept
 
 ##How to use this box :
 
